@@ -35,8 +35,6 @@ export default function App() {
   if (user === undefined) return <></>
   if (!user) return <AuthPage/>
 
-  console.log(user)
-
   return (
     <AppContainer {...props}>
       <Routes>
