@@ -16,7 +16,7 @@ export const makeCanvasProps = (data) => {
 		seriesName: 'data',
 		// xExtents: [min, max + 5],
 		zoomAnchor: lastVisibleItemBasedZoomAnchor,
-		pointsPerPxThreshold: 0.1,
+		pointsPerPxThreshold: 0.5,
 		...scaleProv
 	})
 }
