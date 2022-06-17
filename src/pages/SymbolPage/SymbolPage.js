@@ -16,11 +16,11 @@ export default function SymbolPage(props) {
 				<Title order={2}>Trade {symbol.name} ({symbol.symbol})</Title>
 			</Group>
 			<Group spacing={48} align='baseline'>
-				<SymbolChart symbol={symbol}/>
-				<OrderBook symbol={symbol.code}/>
-				<SpotComponent/>
+				<SymbolChart symbol={symbol} />
+				<OrderBook symbol={symbol.code} />
+				<SpotComponent symbol={symbol.code} ownerID={props.user.userid} walletID={props.user.userid} />
 			</Group>
-			
+
 		</Stack>
 	)
 }

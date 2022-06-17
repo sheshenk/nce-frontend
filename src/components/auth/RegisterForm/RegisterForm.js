@@ -5,7 +5,7 @@ import { showNotification } from "@mantine/notifications"
 import { AUTH_TOKEN } from "../../../constants/authToken"
 import { REGISTER_MUTATION } from "../../../queries/auth"
 
-export default function RegisterForm({setIsLoginMode}) {
+export default function RegisterForm({ setIsLoginMode }) {
 
 	const form = useForm({
 		initialValues: {
@@ -37,12 +37,12 @@ export default function RegisterForm({setIsLoginMode}) {
 
 	return (
 		<>
-			<TextInput placeholder="John Doe" label="Your Name" size="md" {...form.getInputProps('name')}/>
-			<TextInput placeholder="xxx.xxx@u.nus.edu" label="Your Email" size="md" {...form.getInputProps('email')}/>
-			<PasswordInput placeholder="Pasword" label="Password" size="md" {...form.getInputProps('password')}/>
-			<Space/>
+			<TextInput placeholder="John Doe" label="Your Name" size="md" {...form.getInputProps('name')} />
+			<TextInput placeholder="xxx.xxx@u.nus.edu" label="Your Email" size="md" {...form.getInputProps('email')} />
+			<PasswordInput placeholder="Pasword" label="Password" size="md" {...form.getInputProps('password')} />
+			<Space />
 			<Button variant='filled' size="lg" onClick={() => startRegister()}>Register</Button>
-			<Space/>
+			<Space />
 			<Text align="center">Already have an account? <Anchor onClick={() => setIsLoginMode(true)}>Login</Anchor> </Text>
 		</>
 	)

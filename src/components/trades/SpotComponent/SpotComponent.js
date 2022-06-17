@@ -1,7 +1,9 @@
+import { useMutation } from "@apollo/client"
 import { Button, NumberInput, Select, SimpleGrid, Stack, Title } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
 import { useState } from "react";
 import { CurrencyDollar, Hash } from "tabler-icons-react";
+import { ADD_ORDER_MUTATION } from "../../../queries/order";
 
 const modes = [
 	{
@@ -18,7 +20,7 @@ const modes = [
 	},
 ]
 
-export default function SpotComponent() {
+export default function SpotComponent(props) {
 
 	const [mode, setMode] = useState(modes[0].mode)
 	const form = useForm({
@@ -26,6 +28,23 @@ export default function SpotComponent() {
 			orderType: 'Limit',
 			price: 12,
 			qty: 5
+		}
+	})
+	// $symbol: String!, $type: String!, $side: String!, $quantity: Float!, $price: Float!, $ownerID: Int!, $walletID: Int!
+	const [placeOrder] = useMutation(ADD_ORDER_MUTATION, {
+		variables: {
+			symbol: props.symbol,
+			type: form.values.orderType,
+			side: mode,
+			quantity: form.values.qty,
+			price: form.values.price,
+			ownerID: props.ownerID,
+			walletID: props.walletID
+		},
+		onCompleted: ({ createOrder }) => {
+			if (createOrder.response) {
+				console.log(createOrder.response)
+			}
 		}
 	})
 
@@ -36,10 +55,10 @@ export default function SpotComponent() {
 			<SimpleGrid cols={3}>
 				{modes.map(m => <Button size="xs" onClick={() => setMode(m.mode)} variant={m.mode === mode ? 'filled' : 'light'}>{m.mode}</Button>)}
 			</SimpleGrid>
-			<Select value="" {...form.getInputProps('orderType')} data={['Limit', 'Market']}/>
-			{form.values.orderType === 'Limit' && <NumberInput label="Order Price" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<CurrencyDollar size={18}/>} {...form.getInputProps('price')}/>}
-			<NumberInput label="Quantity" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<Hash size={18}/>} {...form.getInputProps('qty')}/>
-			<Button size="md">{mode} Now</Button>
-		</Stack>
+			<Select value="" {...form.getInputProps('orderType')} data={['Limit', 'Market']} />
+			{form.values.orderType === 'Limit' && <NumberInput label="Order Price" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<CurrencyDollar size={18} />} {...form.getInputProps('price')} />}
+			<NumberInput label="Quantity" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<Hash size={18} />} {...form.getInputProps('qty')} />
+			<Button size="md" onClick={() => { placeOrder() }}>{mode} Now</Button>
+		</Stack >
 	)
 }
