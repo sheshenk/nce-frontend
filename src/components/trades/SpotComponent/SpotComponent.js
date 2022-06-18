@@ -38,8 +38,8 @@ export default function SpotComponent(props) {
 			side: mode,
 			quantity: form.values.qty,
 			price: form.values.price,
-			ownerID: props.ownerID,
-			walletID: props.walletID
+			ownerId: props.ownerId,
+			walletId: props.walletId
 		},
 		onCompleted: ({ createOrder }) => {
 			if (createOrder.response) {
@@ -58,7 +58,7 @@ export default function SpotComponent(props) {
 			<Select value="" {...form.getInputProps('orderType')} data={['Limit', 'Market']} />
 			{form.values.orderType === 'Limit' && <NumberInput label="Order Price" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<CurrencyDollar size={18} />} {...form.getInputProps('price')} />}
 			<NumberInput label="Quantity" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<Hash size={18} />} {...form.getInputProps('qty')} />
-			<Button size="md" onClick={() => { placeOrder() }}>{mode} Now</Button>
+			<Button size="md" onClick={() => { placeOrder().catch((error) => { console.log(JSON.stringify(error, null, 2)); }) }}>{mode} Now</Button>
 		</Stack >
 	)
 }

@@ -18,7 +18,7 @@ export default function SymbolPage(props) {
 			<Group spacing={48} align='baseline'>
 				<SymbolChart symbol={symbol} />
 				<OrderBook symbol={symbol.code} />
-				<SpotComponent symbol={symbol.code} ownerID={props.user.userid} walletID={props.user.userid} />
+				<SpotComponent symbol={symbol.code} ownerId={parseInt(props.user.userid)} walletId={parseInt(props.user.userid)} />
 			</Group>
 
 		</Stack>
