@@ -31,6 +31,7 @@ export default function SpotComponent(props) {
 		}
 	})
 	// $symbol: String!, $type: String!, $side: String!, $quantity: Float!, $price: Float!, $ownerID: Int!, $walletID: Int!
+	console.log(props.symbol, props.ownerId, props.walletId)
 	const [placeOrder] = useMutation(ADD_ORDER_MUTATION, {
 		variables: {
 			symbol: props.symbol,
