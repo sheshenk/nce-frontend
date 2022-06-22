@@ -59,7 +59,11 @@ export default function SpotComponent(props) {
 			<Select value="" {...form.getInputProps('orderType')} data={['Limit', 'Market']} />
 			{form.values.orderType === 'Limit' && <NumberInput label="Order Price" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={1000000} icon={<CurrencyDollar size={18} />} {...form.getInputProps('price')} />}
 			<NumberInput label="Quantity" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<Hash size={18} />} {...form.getInputProps('qty')} />
-			<Button size="md" onClick={() => { placeOrder().catch((error) => { console.log(JSON.stringify(error, null, 2)); }) }}>{mode} Now</Button>
+			<Button size="md" onClick={() => {
+				placeOrder();
+				const msg = "An order of " + form.values.qty + " " + props.symbol + " is placed at " + (form.values.price ? ("$" + form.values.price) : "market price")
+				alert(msg)
+			}}>{mode} Now</Button>
 		</Stack >
 	)
 }
