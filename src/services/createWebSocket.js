@@ -1,6 +1,6 @@
 const createWebSocket = (channel, onmessage) => {
 	const ws = new WebSocket("wss://ws.bitstamp.net");
-	ws.onopen = () =>  ws.send(JSON.stringify({ event: 'bts:subscribe', data: { channel: channel } }))
+	ws.onopen = () => ws.send(JSON.stringify({ event: 'bts:subscribe', data: { channel: channel } }))
 	ws.onmessage = onmessage
 	ws.onclose = () => ws.close()
 	return () => ws.close()
@@ -14,7 +14,7 @@ export const finchartOnMessage = (newOrder, interval, setData) => {
 		const msi = interval * 1000
 		var time = parseInt(newOrder.time)
 		time = Math.floor(time / msi) * msi
-		const currentMinData =  data[data.length - 1]
+		const currentMinData = data[data.length - 1]
 		console.log(currentMinData)
 		const lastTime = currentMinData.time.getTime()
 		if (lastTime === time) {

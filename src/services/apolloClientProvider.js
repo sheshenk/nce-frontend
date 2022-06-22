@@ -9,8 +9,8 @@ const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem(AUTH_TOKEN)
     return {
         headers: {
-        ...headers,
-        authorization: `Bearer ${token}`
+            ...headers,
+            authorization: `Bearer ${token}`
         }
     }
 })
@@ -27,7 +27,7 @@ const httpLink = new HttpLink({
 });
 
 const splitLink = split(
-    ({query}) => {
+    ({ query }) => {
         const definition = getMainDefinition(query)
         return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
     },
