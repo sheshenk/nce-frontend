@@ -40,7 +40,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<TradesPage {...props}/>}/>
         <Route path="/trade/:code" element={<SymbolPage {...props}/>}/>
-        <Route path="/assets" element={<AssetsPage {...props}/>}/>
+        <Route path="/assets" element={<AssetsPage props={props}/>}/>
         <Route path="/blog" element={<BlogPage {...props}/>}/>
       </Routes>
     </AppContainer>

@@ -12,7 +12,10 @@ const OrderBook = ({ symbol }) => {
 
   const { subscribeToMore, ...asks } = useQuery(ASK_ORDER_BOOK_QUERY, { variables: { symbol } })
   const bids = useQuery(BID_ORDER_BOOK_QUERY, { variables: { symbol } })
-
+  // console.log("BIDS ",bids.data)
+  // console.log("ASKS ",asks.data ? asks.data.getOpenAskOrdersForSymbol.map((order) => [order.price, order.openquantity]) : [])
+  // console.log(asks.length)
+  // console.log(bids.length)
   return (
     <Stack>
       <Title order={3}>Order Book</Title>

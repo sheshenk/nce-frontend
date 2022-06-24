@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import OrderBook from "../../components/symbol-chart/OrderBook/OrderBook"
 import SymbolChart from "../../components/symbol-chart/SymbolChart/SymbolChart"
 import SpotComponent from "../../components/trades/SpotComponent/SpotComponent"
+import UserOrdersComponent from "../../components/trades/UserOrdersComponent/UserOrdersComponent"
 import { SYMBOLS } from "../../constants/symbols"
 
 export default function SymbolPage(props) {
@@ -19,6 +20,7 @@ export default function SymbolPage(props) {
 				<SymbolChart symbol={symbol} />
 				<OrderBook symbol={symbol.code} />
 				<SpotComponent symbol={symbol.code} ownerId={parseInt(props.user.userid)} walletId={parseInt(props.user.userid)} />
+				<UserOrdersComponent symbol={symbol.code} owner={props.user.userid}/>
 			</Group>
 
 		</Stack>
