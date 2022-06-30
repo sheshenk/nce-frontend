@@ -2,6 +2,7 @@ import { Grid, Stack, Title } from "@mantine/core";
 // import AssetsChart from "../../components/assets/AssetsChart/AssetsChart";
 import AssetsTable from "../../components/assets/AssetsTable/AssetsTable";
 import BalanceCard from "../../components/assets/BalanceCard/BalanceCard";
+import APICard from "../../components/assets/APICard/APICard";
 
 
 export default function AssetsPage({props}) {
@@ -22,6 +23,9 @@ export default function AssetsPage({props}) {
 				</Grid.Col>
 				<Grid.Col span={8}>
 				{<BalanceCard userid={props.user.userid}/>}
+				</Grid.Col>
+				<Grid.Col span={8}>
+				{<APICard />}
 				</Grid.Col>
 			</Grid>
 		</Stack>
