@@ -18,3 +18,12 @@ export const CANCEL_ORDER_MUTATION = gql`
         }
     }
 `
+export const MODIFY_ORDER_MUTATION = gql`
+    mutation ModifyOrder($symbol: String!, $side: String!, $orderId: String!, $prevQuantity: Float!, $prevPrice: Float!, $newQuantity: Float!, $newPrice: Float!) {
+        modifyOrder(symbol: $symbol, side: $side, orderId: $orderId, prevQuantity: $prevQuantity, prevPrice: $prevPrice, newQuantity: $newQuantity, newPrice: $newPrice) {
+            status
+            response
+            error
+        }
+    }
+`
