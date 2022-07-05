@@ -23,6 +23,7 @@ const UserOrdersComponent = ({ symbol, owner }) => {
           else if (obj.buyside === "SELL") {
             return { ...obj, action: 'SELL' };
           }
+          return obj;
         });
         const R4 = R3.map(({ orderid, action, quantity, price, fillprice, createdat, filledat, ...del_attrs }) => ({ orderid, action, quantity, price, fillprice, createdat, filledat }))
         const R5 = R4.map(item => {
@@ -74,7 +75,7 @@ const UserOrdersComponent = ({ symbol, owner }) => {
           return { ...rest, open_quantity, fill_cost, created_at, updated_at }
         }
         );
-        console.log("OPEN BID R4", R4)
+        // console.log("OPEN BID R4", R4)
         setOpenBidOrders(R4)
       }
     } catch (error) { }
