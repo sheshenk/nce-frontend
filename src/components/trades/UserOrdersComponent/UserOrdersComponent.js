@@ -17,10 +17,10 @@ const UserOrdersComponent = ({ symbol, owner }) => {
         const R1 = res.map(d => ({ ...d, createdat: new Date(parseInt(d.createdat)).toLocaleString("en-US") }))
         const R2 = R1.map(d => ({ ...d, filledat: new Date(parseInt(d.filledat)).toLocaleString("en-US") }))
         const R3 = R2.map(obj => {
-          if (obj.buyside === '1') {
+          if (obj.buyside === "BUY") {
             return { ...obj, action: 'BUY' };
           }
-          else {
+          else if (obj.buyside === "SELL") {
             return { ...obj, action: 'SELL' };
           }
         });
