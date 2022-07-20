@@ -10,51 +10,45 @@ import { BID_ORDER_BOOK_QUERY, BID_ORDER_BOOK_SUBSCRIPTION } from "../../../quer
 const OrderBook = ({ symbol }) => {
   const currencyArray = symbol.toUpperCase().match(/.{1,3}/g);
 
-  const { subscribeToMore, ...asks } = useQuery(ASK_ORDER_BOOK_QUERY, { variables: { symbol } })
-  const bids = useQuery(BID_ORDER_BOOK_QUERY, { variables: { symbol } })
-  // console.log("BIDS ",bids.data)
-  // console.log("ASKS ",asks.data ? asks.data.getOpenAskOrdersForSymbol.map((order) => [order.price, order.openquantity]) : [])
-  // console.log(asks.length)
-  // console.log(bids.length)
-  // if (asks.data) {console.log("AD ",asks.data)}
-  // if (asks.data) {console.log("ADG ",asks.data.getOpenAskOrdersForSymbol)}
+  const { subscribeToMore: subscribeToAsk, ...asks } = useQuery(ASK_ORDER_BOOK_QUERY, { variables: { symbol: symbol, number: 4 } })
+  const { subscribeToMore: subscribeToBid, ...bids } = useQuery(BID_ORDER_BOOK_QUERY, { variables: { symbol: symbol, number: 4 } })
 
   return (
     <Stack>
       <Title order={3}>Order Book</Title>
-      {asks.data ? ( asks.data.getOpenAskOrdersForSymbol ?
+      {asks.data ? (asks.data.getOpenAskOrdersForSymbol ?
         <ExchangeTable title={"asks"} currencyArray={currencyArray} arr={asks.data ? asks.data.getOpenAskOrdersForSymbol.map((order) => [order.price, order.openquantity]) : []} color={colors.red(1)}
           subscribeToNewOrderBook={
-            () => subscribeToMore({
+            () => subscribeToAsk({
               document: ASK_ORDER_BOOK_SUBSCRIPTION,
               variables: { symbol },
               updateQuery: (prev, { subscriptionData }) => {
-                if (!subscriptionData.data) return prev
-                return subscriptionData.data.newAskOpenOrder
+                if (!subscriptionData.data || !subscriptionData.data.getOpenAskOrdersForSymbol) return prev
+                return subscriptionData.data
               }
             })
           }
         />
-      : <div>Empty Ask OrderBook</div>) : (
+        : <div>Empty Ask OrderBook</div>) : (
         <div>No Asks</div>
       )}
-      {bids.data ? ( bids.data.getOpenBidOrdersForSymbol ? 
+      {bids.data ? (bids.data.getOpenBidOrdersForSymbol ?
         <ExchangeTable title={"bids"} currencyArray={currencyArray} arr={bids.data ? bids.data.getOpenBidOrdersForSymbol.map((order) => [order.price, order.openquantity]) : []} color={colors.green(1)}
           subscribeToNewOrderBook={
-            () => subscribeToMore({
+            () => subscribeToBid({
               document: BID_ORDER_BOOK_SUBSCRIPTION,
-              variables: { symbol },
+              variables: { symbol: symbol },
               updateQuery: (prev, { subscriptionData }) => {
-                if (!subscriptionData.data) return prev
-                return subscriptionData.data.newBidOpenOrder
+                if (!subscriptionData.data || !subscriptionData.data.getOpenBidOrdersForSymbol) return prev
+                return subscriptionData.data
               }
             })
           }
         />
-      : <div>Empty Bid OrderBook</div>) : (
+        : <div>Empty Bid OrderBook</div>) : (
         <div>No Bids</div>
       )}
-      
+
     </Stack>
   );
 };

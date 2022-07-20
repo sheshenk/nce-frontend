@@ -11,7 +11,7 @@ export const BID_ORDER_BOOK_QUERY = gql`
 
 export const BID_ORDER_BOOK_SUBSCRIPTION = gql`
     subscription OnBidOrderUpdate($symbol: String!) {
-        newBidOpenOrder(symbol: $symbol) {
+        getOpenBidOrdersForSymbol(symbol: $symbol) {
             price
             openquantity
         }

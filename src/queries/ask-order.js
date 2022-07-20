@@ -11,7 +11,7 @@ export const ASK_ORDER_BOOK_QUERY = gql`
 
 export const ASK_ORDER_BOOK_SUBSCRIPTION = gql`
     subscription OnAskOrderUpdate($symbol: String!) {
-        newAskOpenOrder(symbol: $symbol) {
+        getOpenAskOrdersForSymbol(symbol: $symbol) {
             price
             openquantity
         }
