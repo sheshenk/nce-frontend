@@ -12,3 +12,16 @@ export const MARKET_HISTORY_QUERY = gql`
 		}
 	}
 `
+
+export const MARKET_HISTORY_SUBSCRIPTION = gql`
+    subscription OnMarketHistoryUpdate($symbol: String!) {
+    	updateMarketHistory(symbol: $symbol) {
+			time
+			open
+			close
+			high
+			low
+			volume
+		}
+    }
+`

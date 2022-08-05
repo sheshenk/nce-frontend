@@ -6,31 +6,24 @@ const createWebSocket = (channel, onmessage) => {
 	return () => ws.close()
 }
 
-export const finchartOnMessage = (newOrder, interval, setData) => {
-	const price = newOrder.price
-	const quantity = newOrder.quantity
-	if (price === undefined) return
+export const finchartOnMessage = (newMarketHistory, interval, setData) => {
 	setData(data => {
 		const msi = interval * 1000
-		var time = parseInt(newOrder.time)
+		var time = parseInt(newMarketHistory.time)
 		time = Math.floor(time / msi) * msi
 		const currentMinData = data[data.length - 1]
 		console.log(currentMinData)
 		const lastTime = currentMinData.time.getTime()
 		if (lastTime === time) {
-			currentMinData.high = price > currentMinData.high ? price : currentMinData.high
-			currentMinData.low = price < currentMinData.low ? price : currentMinData.low
-			currentMinData.close = price
-			currentMinData.volume += quantity
+			// currentMinData.high = price > currentMinData.high ? price : currentMinData.high
+			// currentMinData.low = price < currentMinData.low ? price : currentMinData.low
+			// currentMinData.close = price
+			// currentMinData.volume += quantity
 			return [...data.slice(0, -1), currentMinData]
 		} else {
 			const newMinData = ({
-				time: new Date(time),
-				open: price,
-				high: price,
-				low: price,
-				close: price,
-				volume: quantity
+				...newMarketHistory,
+				time: new Date(time)
 			})
 			return [...data, newMinData]
 		}
