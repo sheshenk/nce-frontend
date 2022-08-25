@@ -6,12 +6,12 @@ export default function NCENavbar() {
 	return (
 		<Navbar width={{ base: 220 }} height={500} p='xs'>
 			<Stack spacing={4}>
-				<NCENavbarLink title={"Trades"} icon={<ChartLine/>} color='blue' url='/'/>
-				<NCENavbarLink title={"Your Assets"} icon={<ListDetails/>} color='orange' url='/assets'/>
-				<NCENavbarLink title={"NUSwap Blog"} icon={<News/>} color='green' url='/blog'/>
-				<NCENavbarLink title={"Crypto Stats"} icon={<Aperture/>} color='violet' url='/viz'/>
+				<NCENavbarLink title={"Trades"} icon={<ChartLine />} color='blue' url='/' />
+				<NCENavbarLink title={"Your Assets"} icon={<ListDetails />} color='orange' url='/assets' />
+				<NCENavbarLink title={"Learn"} icon={<News />} color='green' url='/blog' />
+				<NCENavbarLink title={"Crypto Stats"} icon={<Aperture />} color='violet' url='/viz' />
 			</Stack>
-			
+
 		</Navbar>
 	)
 }
