@@ -1,5 +1,5 @@
 import { Navbar, Stack } from "@mantine/core"
-import { ChartLine, ListDetails, News } from "tabler-icons-react"
+import { ChartLine, ListDetails, News, Aperture } from "tabler-icons-react"
 import NCENavbarLink from "../NCENavbarLink/NCENavbarLink"
 
 export default function NCENavbar() {
@@ -9,6 +9,7 @@ export default function NCENavbar() {
 				<NCENavbarLink title={"Trades"} icon={<ChartLine/>} color='blue' url='/'/>
 				<NCENavbarLink title={"Your Assets"} icon={<ListDetails/>} color='orange' url='/assets'/>
 				<NCENavbarLink title={"NUSwap Blog"} icon={<News/>} color='green' url='/blog'/>
+				<NCENavbarLink title={"Crypto Stats"} icon={<Aperture/>} color='violet' url='/viz'/>
 			</Stack>
 			
 		</Navbar>
