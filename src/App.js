@@ -8,6 +8,7 @@ import AuthPage from "./pages/AuthPage/AuthPage";
 import BlogPage from "./pages/BlogPage/BlogPage";
 import SymbolPage from "./pages/SymbolPage/SymbolPage";
 import TradesPage from "./pages/TradesPage/TradesPage";
+import VizPage from "./pages/VizPage/VizPage";
 import { CURRENT_USER } from "./queries/auth";
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/trade/:code" element={<SymbolPage {...props} />} />
         <Route path="/assets" element={<AssetsPage props={props} />} />
         <Route path="/blog" element={<BlogPage {...props} />} />
+        <Route path="/viz" element={<VizPage {...props} />} />
       </Routes>
     </AppContainer>
   );
