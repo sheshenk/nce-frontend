@@ -39,5 +39,9 @@ export const coinGecko = {
   companies: (coinId) =>
     `/companies/public_treasury/${coinId}`,
   statusUpdates: (page, perPage, category) =>
-    `/status_updates?per_page=${perPage}&page=${page}&category=${category}`
+    `/status_updates?per_page=${perPage}&page=${page}&category=${category}`,
+  defi: 
+    `/coins/categories`,
+  defi_global:
+    `/global/decentralized_finance_defi`,
 };

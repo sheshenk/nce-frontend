@@ -1,5 +1,6 @@
 import React from 'react';
 import Chart from "react-apexcharts";
+import { Stack, SimpleGrid, Container } from "@mantine/core"
 
 export default function FearGreedChart({fearGreedIndex}) {
 
@@ -156,40 +157,49 @@ export default function FearGreedChart({fearGreedIndex}) {
     };
 
   return (
-    <div>
-        <div id='chart_fear'>
-            <Chart
-              options={chartState.fearOptions}
-              series={chartState.fearSeries}
-              type="line"
-              width="500"
-            />
+    <Container style={{ width: '100%' }}>
+    <SimpleGrid cols={2}>
+      <Stack>
+        <div>
+          <div id='chart_fear'>
+                <Chart
+                  options={chartState.fearOptions}
+                  series={chartState.fearSeries}
+                  type="line"
+                  width="100%"
+                />
+          </div>
+          <div id='chart_BTC'>
+              <Chart
+                options={chartState.BTCOptions}
+                series={chartState.BTCSeries}
+                type="line"
+                width="100%"
+              />
+          </div>
         </div>
-        <div id='chart_BTC'>
-            <Chart
-              options={chartState.BTCOptions}
-              series={chartState.BTCSeries}
-              type="line"
-              width="500"
-            />
+      </Stack>
+      <Stack>
+        <div>
+          <div id='chart_ETH'>
+                <Chart
+                  options={chartState.ETHOptions}
+                  series={chartState.ETHSeries}
+                  type="line"
+                  width="100%"
+                />
+            </div>
+            <div id='chart_XRP'>
+                <Chart
+                  options={chartState.XRPOptions}
+                  series={chartState.XRPSeries}
+                  type="line"
+                  width="100%"
+                />
+            </div>
         </div>
-        <div id='chart_ETH'>
-            <Chart
-              options={chartState.ETHOptions}
-              series={chartState.ETHSeries}
-              type="line"
-              width="500"
-            />
-        </div>
-        <div id='chart_XRP'>
-            <Chart
-              options={chartState.XRPOptions}
-              series={chartState.XRPSeries}
-              type="line"
-              width="500"
-            />
-        </div>
-    </div>
-    
+      </Stack>
+    </SimpleGrid>
+    </Container>
   )
 }

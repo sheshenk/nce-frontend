@@ -1,56 +1,9 @@
 import React from 'react';
 import Chart from "react-apexcharts";
+import { Stack, Card, Text, Divider} from "@mantine/core";
+export default function MarketCapBarChart({MarketCapData, globalCap, names}) {
 
-export default function MarketCapBarChart({MarketCapData, Limit}) {
-
-  // console.log(MarketCapData, Limit)
-
-  const newData = [];
-
-  const globalCap = parseFloat(MarketCapData.data.totalMarketCap.usd)
-  // console.log(globalCap)
-
-  const topcoins = MarketCapData.data.marketCapPercentage
-  // console.log(topcoins)
-
-  const btc_cap = parseFloat(globalCap)*parseFloat(topcoins.btc)/100 
-  const eth_cap = parseFloat(globalCap)*parseFloat(topcoins.eth)/100 
-  const xrp_cap = parseFloat(globalCap)*parseFloat(topcoins.xrp)/100
-  const usdt_cap = parseFloat(globalCap)*parseFloat(topcoins.usdt)/100
-  const doge_cap = parseFloat(globalCap)*parseFloat(topcoins.doge)/100
-  const others =  parseFloat(globalCap) - btc_cap - eth_cap - xrp_cap - usdt_cap - doge_cap
-  // console.log(btc_cap, eth_cap, xrp_cap, usdt_cap, doge_cap, others)
-
-  newData.push({
-    x: 'BTC',
-    y: btc_cap,
-    fillColor: '#f2a900'
-  })
-  newData.push({
-    x: 'ETH',
-    y: eth_cap,
-    fillColor: '#215CAF'
-  })
-  newData.push({
-    x: 'USDT',
-    y: usdt_cap,
-    fillColor: '#85bb65'
-  })
-  newData.push({
-    x: 'XRP',
-    y: xrp_cap,
-    fillColor: '#00aae4'
-  })
-  newData.push({
-    x: 'DOGE',
-    y: doge_cap,
-    fillColor: '#EB8C87'
-  })
-  newData.push({
-    x: 'OTHERS',
-    y: others,
-    fillColor: '#000000'
-  })
+  const newData = MarketCapData
 
   const chartState = {
       
@@ -62,18 +15,34 @@ export default function MarketCapBarChart({MarketCapData, Limit}) {
             id: "MarketBar",
             group: "MarketBar",
             type: 'bar',
-            height: 160
+            height: "100%",
+            width: "100%"
+        },
+        plotOptions: {
+          bar: {
+            // borderRadius: 4,
+            horizontal: true,
+          }
         },
         title: {
-            text: 'Market Capitalization by Bar',
+            text: 'Select Cryptocurrency Shares of the Market',
             align: 'left'
         },
         yaxis: {
-            labels: {
-              formatter: function (value) {
-                return parseInt(value/1000000000) + "B$";
-              }
-            },
+            // labels: {
+            //   formatter: function (value) {
+            //     return parseInt(value/1000000000) + "B$";
+            //   }
+            // },
+            categories: names
+        },
+        xaxis: {
+          // categories: names
+          labels: {
+            formatter: function (value) {
+              return parseInt(value/1000000000) + "B$";
+            }
+          },
         },
         dataLabels: {
           enabled: false
@@ -96,17 +65,31 @@ export default function MarketCapBarChart({MarketCapData, Limit}) {
     };
 
   return (
-    <div>
-        <div>Crypto Market Cap : {parseFloat(globalCap/1000000000000).toFixed(3)} Trillion USD</div>
-        <div id='chart_hash'>
-            <Chart
+    // <div>
+    //     <div>Crypto Market Cap : {parseFloat(globalCap/1000000000000).toFixed(3)} Trillion USD</div>
+    //     <div id='chart_hash'>
+    //         <Chart
+    //           options={chartState.MarketOptions}
+    //           series={chartState.MarketSeries}
+    //           type="bar"
+    //           width="100%"
+    //         />
+    //     </div>
+    // </div>
+    <Card>
+			<Stack >
+				<Text size='xl' align='center'>{parseFloat(globalCap/1000000000000).toFixed(3)} Trillion USD</Text>
+			</Stack>
+			<Divider my='md' size='xs' mx='sm'/>
+			<Stack spacing={6}>
+        <Chart
               options={chartState.MarketOptions}
               series={chartState.MarketSeries}
               type="bar"
-              width="500"
-            />
-        </div>
-    </div>
+              width="100%"
+        />	
+      </Stack>
+		</Card>
     
   )
 }

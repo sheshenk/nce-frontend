@@ -34,13 +34,14 @@ export default function TrendingCoinData() {
             // start = start + 1;
         });
 
+        console.log("TrendingData Ready")
         setTrendingCoin(TrendingCoinArr)
     }
 
     getTrendingCoinData();
   }, []);
 
-  if (!TrendingCoin) return "No Data"
+  if (!TrendingCoin) return "Data Loading"
 
   return(
   <div>

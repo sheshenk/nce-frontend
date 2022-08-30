@@ -82,8 +82,8 @@ export default function FearGreedData() {
 
         cacheWithExpiry('FearGreedData', FinalResponse, 1200000);  // Cache Period: 20 minutes
       
-        // console.log("FR : ",FinalResponse)
         console.log("Can't cache, using new fear greed data")
+        console.log("FearData Fetched")
         setFear(FinalResponse)
 
       }
@@ -92,13 +92,11 @@ export default function FearGreedData() {
     getFearData();
   }, []);
 
-  if (!fear) return "No Data"
+  if (!fear) return "Data Loading"
 
   return(
   <div>
-    {/* <div><TableGenerator DataObject = {fear} title = {"FearData"}/></div> */}
-    {/* {console.log("1DONE")} */}
-    <div><FearGreedChart fearGreedIndex = {fear}/></div>
+    <FearGreedChart fearGreedIndex = {fear}/>
   </div>
   );
 }

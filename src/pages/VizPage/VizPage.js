@@ -1,36 +1,81 @@
 import React from "react";
-import { Stack, Title, Card} from "@mantine/core";
+import { Stack, Title, Card, Grid} from "@mantine/core";
 import FearGreedImage from "./DataAPI/FearGreedImage";
 import FearGreedData from "./DataAPI/FearGreedData";
-import WidgetDisplay from "./DataAPI/WidgetsDisplay";
-// import BitcoinHashRateData from "./DataAPI/BitcoinHashRateData";
 import GlobalCapData from "./DataAPI/TotalCap";
 import Top10CoinData from "./DataAPI/TopCoins";
 import TrendingCoinData from "./DataAPI/TrendingNow";
+import DeFi from "./DataAPI/DeFi";
 
 export default function VizPage() {
 
 	return (
 		<div>
 		<Stack p={24}>
-			<Title order={2}>Viz Page</Title>
-			<Card>Fear Greed Image</Card>
-			<Card><FearGreedImage/></Card>
-			<Card>Fear Greed History</Card>
-			<Card><FearGreedData/></Card>
-			{/* <Card>BTC Hash Rate</Card>
-			<Card><BitcoinHashRateData /></Card> */}
-			<Card>TotalCap Bar Chart and Value Card</Card>
-			<Card><GlobalCapData /></Card>
-			<Card>Top 10 Coins</Card>
-			<Card><Top10CoinData/></Card>
-			{/* <Card>Correlation</Card>
-			<Card>--get history and run pearson correlation to heatmap--</Card> */}
-			<Card>Trending Projects</Card>
-			<Card><TrendingCoinData /></Card>
-			{/* <Card>Live Widget/DATA</Card>
-			<Card>--websocket figure out--</Card> */}
-			{/* <Card><WidgetDisplay/></Card> */}
+			<Title order={2}>Global Cryptocurrency Status</Title>
+			<Card>
+				<Grid columns={5}>
+					<Grid.Col span={2}>
+						<Card withBorder>
+							<Stack>
+								<Title order={4}>Fear Greed Index</Title>
+								<Card><FearGreedImage/></Card>
+							</Stack>
+						</Card>
+					</Grid.Col>
+					<Grid.Col span={3}>
+						<Card withBorder>
+							<Stack>
+								<Title order={4}>Fear Greed History</Title>
+								<Card><FearGreedData/></Card>
+							</Stack>
+						</Card>
+					</Grid.Col>
+				</Grid>
+			</Card>
+			
+			<Card>
+				<Grid columns={10}>
+					<Grid.Col span={4}>
+						<Card withBorder>
+							<Stack>
+								<Title order={4}>Global Cryptocurrency Market Cap</Title>
+								<div><GlobalCapData /></div>
+							</Stack>
+						</Card>
+					</Grid.Col>
+					<Grid.Col span={6}>
+						<Card withBorder>
+							<Stack>
+								<Title order={4}>Top 10 Cryptocurrencies</Title>
+								<div><Top10CoinData/></div>
+							</Stack>
+						</Card>
+					</Grid.Col>
+				</Grid>
+			</Card>
+
+			<Card>
+				<Grid columns={10}>
+					<Grid.Col span={4}>
+						<Card withBorder>
+							<Stack>
+								<Title order={4}>Trending Coins (powered by CoinGecko)</Title>
+								<div><TrendingCoinData /></div>
+							</Stack>
+						</Card>
+					</Grid.Col>
+					<Grid.Col span={6}>
+						<Card withBorder>
+							<Stack>
+								<Title order={4}>Decentralized Finance</Title>
+								<div><DeFi /></div>
+							</Stack>
+						</Card>
+					</Grid.Col>
+				</Grid>
+			</Card>
+			<Card></Card>
 		</Stack>
 		</div>
 	)

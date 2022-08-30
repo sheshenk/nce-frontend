@@ -39,13 +39,16 @@ export default function Top10CoinData() {
             start = start + 1;
         });
 
+        console.log("TopCoinData Ready")
         setTopCoin(topCoinArr)
+
     }
 
+    console.log("Loading Global Top Coins Data")
     getTopCoinData();
   }, []);
 
-  if (!TopCoin) return "No Data"
+  if (!TopCoin) return "Data Loading"
 
   return(
   <div>
