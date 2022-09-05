@@ -11,6 +11,13 @@ import TradesPage from "./pages/TradesPage/TradesPage";
 import VizPage from "./pages/VizPage/VizPage";
 import { CURRENT_USER } from "./queries/auth";
 
+import FearGreedData from "./pages/VizPage/DataAPI/FearGreedData";
+import FearGreedImage from "./pages/VizPage/DataAPI/FearGreedImage";
+import GlobalCapData from "./pages/VizPage/DataAPI/TotalCap";
+import DeFi from "./pages/VizPage/DataAPI/DeFi";
+import TrendingCoinData from "./pages/VizPage/DataAPI/TrendingNow";
+import Top10CoinData from "./pages/VizPage/DataAPI/TopCoins";
+
 export default function App() {
 
   const { loading, error, data } = useQuery(CURRENT_USER)
@@ -44,6 +51,13 @@ export default function App() {
         <Route path="/assets" element={<AssetsPage props={props} />} />
         <Route path="/blog" element={<BlogPage {...props} />} />
         <Route path="/viz" element={<VizPage {...props} />} />
+        
+        <Route path="/viz/fear_greed_data" element={<FearGreedData {...props} />}/>
+        <Route path="/viz/fear_greed_image" element={<FearGreedImage {...props} />}/>
+        <Route path="/viz/total_cap" element={<GlobalCapData {...props} />}/>
+        <Route path="/viz/defi" element={<DeFi {...props} />}/>
+        <Route path="/viz/top_coins" element={<Top10CoinData {...props} />}/>
+        <Route path="/viz/trending_coins" element={<TrendingCoinData {...props} />}/>
       </Routes>
     </AppContainer>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import Chart from "react-apexcharts";
-import { Stack, Card, Text, Divider} from "@mantine/core";
+import {Card} from "@mantine/core";
 
 export default function DeFiDonut({Data}) {
 
