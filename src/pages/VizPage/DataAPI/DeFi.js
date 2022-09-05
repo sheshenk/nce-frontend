@@ -14,11 +14,11 @@ export default function DeFi() {
 
       const cachedDeFiCapData = retrieveCache('DeFiCapData');
 
-      // if (cachedDeFiCapData) {
-      //   setDeFiCapData(cachedDeFiCapData)
-      //   console.log("Used DeFi Cap cache")
-      // }
-      // else {
+      if (cachedDeFiCapData) {
+        setDeFiCapData(cachedDeFiCapData)
+        console.log("Used DeFi Cap cache")
+      }
+      else {
         const canceler = axios.CancelToken.source();
 
         const response = await http.request({
@@ -44,12 +44,12 @@ export default function DeFi() {
           })
         });
 
-        console.log(defiData)
+        // console.log(defiData)
   
         cacheWithExpiry('DeFiCapData', defiData, 1200000); 
         console.log("DeFiCapData Fetched")
         setDeFiCapData(defiData)
-      // }
+      }
 
     }
 

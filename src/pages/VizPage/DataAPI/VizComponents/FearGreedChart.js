@@ -29,15 +29,27 @@ export default function FearGreedChart({fearGreedIndex}) {
         xaxis: {
             type: 'datetime',
         },
+        yaxis: {
+            title: {
+              text: 'Fear',
+              style: {
+                color: undefined,
+                fontSize: '12px',
+                fontFamily: "MuseoModerno, Arial, sans-serif" ,
+                fontWeight: 250,
+            },
+          },
+        },
         tooltip: {
             custom: function({series, seriesIndex, dataPointIndex, w}) {
               var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
               
-              return '<ul>' +
-              '<li><b>Date</b>: ' + data.datestring + '</li>' +
-              '<li><b>Fear Value</b>: ' + data.y + '</li>' +
-              '<li><b>classification</b>: \'' + data.classification + '\'</li>' +
-              '</ul>';
+              // return '<ul>' +
+              // '<li><b>Date</b>: ' + data.datestring + '</li>' +
+              // '<li><b>Fear Value</b>: ' + data.y + '</li>' +
+              // '<li><b>classification</b>: \'' + data.classification + '\'</li>' +
+              // '</ul>';
+              return data.y + ' : ' + data.classification
             }
         },
         colors: ['#85bb65']
@@ -63,18 +75,28 @@ export default function FearGreedChart({fearGreedIndex}) {
         yaxis: {
             labels: {
               formatter: function (value) {
-                return parseInt(value/1000) + "K$";
+                return parseInt(value/1000);
               }
             },
+            title: {
+              text: 'Price (10k $)',
+              style: {
+                color: undefined,
+                fontSize: '12px',
+                fontFamily: "MuseoModerno, Arial, sans-serif" ,
+                fontWeight: 250,
+            },
+          },
         },
         tooltip: {
             custom: function({series, seriesIndex, dataPointIndex, w}) {
               var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
               
-              return '<ul>' +
-              '<li><b>Date</b>: ' + data.datestring + '</li>' +
-              '<li><b>BTC Price</b>: ' + parseInt(data.y) + '</li>' +
-              '</ul>';
+              // return '<ul>' +
+              // '<li><b>Date</b>: ' + data.datestring + '</li>' +
+              // '<li><b>BTC Price</b>: ' + parseInt(data.y) + '</li>' +
+              // '</ul>';
+              return 'BTC Price = ' + parseInt(data.y) +' $'
             }
         },
         colors: ['#f2a900']
@@ -100,18 +122,28 @@ export default function FearGreedChart({fearGreedIndex}) {
       yaxis: {
           labels: {
             formatter: function (value) {
-              return parseInt(value/1000) + "K$";
-            }
+              return parseInt(value/1000);
+            },
           },
+          title: {
+            text: 'Price (1k $)',
+            style: {
+              color: undefined,
+              fontSize: '12px',
+              fontFamily: "MuseoModerno, Arial, sans-serif" ,
+              fontWeight: 250,
+          },
+        },
       },
       tooltip: {
           custom: function({series, seriesIndex, dataPointIndex, w}) {
             var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
             
-            return '<ul>' +
-            '<li><b>Date</b>: ' + data.datestring + '</li>' +
-            '<li><b>ETH Price</b>: ' + parseInt(data.y) + '</li>' +
-            '</ul>';
+            // return '<ul>' +
+            // '<li><b>Date</b>: ' + data.datestring + '</li>' +
+            // '<li><b>ETH Price</b>: ' + parseInt(data.y) + '</li>' +
+            // '</ul>';
+            return 'ETH Price = ' + parseInt(data.y) +' $'
           }
       },
       colors: ['#215CAF']
@@ -137,18 +169,29 @@ export default function FearGreedChart({fearGreedIndex}) {
       yaxis: {
           labels: {
             formatter: function (value) {
-              return parseFloat(value).toFixed(2) + "$";
-            }
+              return parseFloat(value).toFixed(2);
+            },
+            
           },
+          title: {
+            text: 'Price ($)',
+            style: {
+              color: undefined,
+              fontSize: '12px',
+              fontFamily: "MuseoModerno, Arial, sans-serif" ,
+              fontWeight: 250,
+          },
+        },
       },
       tooltip: {
           custom: function({series, seriesIndex, dataPointIndex, w}) {
             var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
             
-            return '<ul>' +
-            '<li><b>Date</b>: ' + data.datestring + '</li>' +
-            '<li><b>XRP Price</b>: ' + parseFloat(data.y).toFixed(2) + '</li>' +
-            '</ul>';
+            // return '<ul>' +
+            // '<li><b>Date</b>: ' + data.datestring + '</li>' +
+            // '<li><b>XRP Price</b>: ' + parseFloat(data.y).toFixed(2) + '</li>' +
+            // '</ul>';
+            return 'XRP Price = ' + parseFloat(data.y).toFixed(4) +' $'
           }
       },
       colors: ['#00aae4']

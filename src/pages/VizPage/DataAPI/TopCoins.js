@@ -28,6 +28,10 @@ export default function Top10CoinData() {
         let start = 1;
 
         normalizedTopCoinList.forEach((coin) => {
+            let color = 'green';
+            if (parseFloat(coin.priceChangePercentage24H).toFixed(3) < 0)
+            {color = 'red'}
+
             topCoinArr.push({
                 Rank: start, 
                 Name: coin.id.toUpperCase(),
@@ -35,10 +39,13 @@ export default function Top10CoinData() {
                 MarketCap_Billions_USD: parseFloat(coin.marketCap/1000000000).toFixed(3),
                 Price_USD: parseFloat(coin.currentPrice).toFixed(3),
                 ChangePercent24h: parseFloat(coin.priceChangePercentage24H).toFixed(3),
+                Logo: coin.image,
+                color_change: color
               });
             start = start + 1;
         });
-
+        
+        
         console.log("TopCoinData Ready")
         setTopCoin(topCoinArr)
 

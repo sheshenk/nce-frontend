@@ -44,8 +44,9 @@ export default function GlobalCapData() {
         const eth_cap = parseFloat(globalCap)*parseFloat(topcoins.eth)/100 ;
         const xrp_cap = parseFloat(globalCap)*parseFloat(topcoins.xrp)/100 ;
         const usdt_cap = parseFloat(globalCap)*parseFloat(topcoins.usdt)/100 ;
-        const doge_cap = parseFloat(globalCap)*parseFloat(topcoins.doge)/100 ;
-        const others =  parseFloat(globalCap) - btc_cap - eth_cap - xrp_cap - usdt_cap - doge_cap ;
+        // const doge_cap = parseFloat(globalCap)*parseFloat(topcoins.doge)/100 ;
+        // const others =  parseFloat(globalCap) - btc_cap - eth_cap - xrp_cap - usdt_cap - doge_cap ;
+        const others =  parseFloat(globalCap) - btc_cap - eth_cap - xrp_cap - usdt_cap;
         // console.log(btc_cap, eth_cap, xrp_cap, usdt_cap, doge_cap, others)
   
         newData.push({
@@ -68,11 +69,11 @@ export default function GlobalCapData() {
           y: xrp_cap,
           fillColor: '#00aae4'
         })
-        newData.push({
-          x: 'DOGE',
-          y: doge_cap,
-          fillColor: '#EB8C87'
-        })
+        // newData.push({
+        //   x: 'DOGE',
+        //   y: doge_cap,
+        //   fillColor: '#EB8C87'
+        // })
         newData.push({
           x: 'OTHERS',
           y: others,

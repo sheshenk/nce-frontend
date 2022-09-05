@@ -6,7 +6,7 @@ export default function DeFiDonut({Data}) {
 
   const newData = Data
 
-  console.log("ND",newData)
+  // console.log("ND",newData)
 
   const chartState = {
       
@@ -29,8 +29,17 @@ export default function DeFiDonut({Data}) {
           // categories: names
           labels: {
             formatter: function (value) {
-              return parseInt(value/1000000000) + "B$";
+              return parseInt(value/1000000000);
             }
+          },
+          title: {
+            text: 'Market Cap (Bilions USD)',
+            style: {
+              color: undefined,
+              fontSize: '12px',
+              fontFamily: "MuseoModerno, Arial, sans-serif" ,
+              fontWeight: 250,
+          },
           },
         },
         dataLabels: {
@@ -46,10 +55,11 @@ export default function DeFiDonut({Data}) {
             custom: function({series, seriesIndex, dataPointIndex, w}) {
               var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
               
-              return '<ul>' +
-              '<li><b>Ecosystem</b>: ' + data.x + '</li>' +
-              '<li><b>Value</b>: ' + parseFloat(data.y/1000000000).toFixed(3).toString() +' B $ </li>' +
-              '</ul>';
+              // return '<ul>' +
+              // '<li><b>Ecosystem</b>: ' + data.x + '</li>' +
+              // '<li><b>Value</b>: ' + parseFloat(data.y/1000000000).toFixed(3).toString() +' B $ </li>' +
+              // '</ul>';
+              return data.x + ' = ' + parseFloat(data.y/1000000000).toFixed(3).toString() +' B $';
             }
         },
     },

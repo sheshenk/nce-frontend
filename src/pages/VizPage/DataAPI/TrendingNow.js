@@ -20,7 +20,7 @@ export default function TrendingCoinData() {
           });
 
         const normalizedTrendingCoinList = toCamelCase(TrendingCoinsList.data.coins);
-
+        
         const TrendingCoinArr = [];
 
         // let start = 1;
@@ -29,7 +29,8 @@ export default function TrendingCoinData() {
             TrendingCoinArr.push({
                 // Rank: start, 
                 Name: coin.item.name,
-                Symbol: coin.item.symbol
+                Symbol: coin.item.symbol,
+                Logo: coin.item.small
               });
             // start = start + 1;
         });
@@ -37,7 +38,7 @@ export default function TrendingCoinData() {
         console.log("TrendingData Ready")
         setTrendingCoin(TrendingCoinArr)
     }
-
+    
     getTrendingCoinData();
   }, []);
 

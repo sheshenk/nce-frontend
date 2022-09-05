@@ -40,8 +40,17 @@ export default function MarketCapBarChart({MarketCapData, globalCap, names}) {
           // categories: names
           labels: {
             formatter: function (value) {
-              return parseInt(value/1000000000) + "B$";
+              return parseInt(value/1000000000);
             }
+          },
+          title: {
+            text: 'Market Cap (Bilions USD)',
+            style: {
+              color: undefined,
+              fontSize: '12px',
+              fontFamily: "MuseoModerno, Arial, sans-serif" ,
+              fontWeight: 250,
+          },
           },
         },
         dataLabels: {
@@ -54,10 +63,11 @@ export default function MarketCapBarChart({MarketCapData, globalCap, names}) {
             custom: function({series, seriesIndex, dataPointIndex, w}) {
               var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
               
-              return '<ul>' +
-              '<li><b>Coin</b>: ' + data.x + '</li>' +
-              '<li><b>Market Cap</b>: ' + parseFloat(data.y/1000000000).toFixed(3).toString() +' B $ </li>' +
-              '</ul>';
+              // return '<ul>' +
+              // '<li><b>Coin</b>: ' + data.x + '</li>' +
+              // '<li><b>Market Cap</b>: ' + parseFloat(data.y/1000000000).toFixed(3).toString() +' B $ </li>' +
+              // '</ul>';
+              return data.x + ' = ' + parseFloat(data.y/1000000000).toFixed(3).toString() +' B $';
             }
         },
     },
