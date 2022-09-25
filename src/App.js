@@ -17,6 +17,8 @@ import GlobalCapData from "./pages/VizPage/DataAPI/TotalCap";
 import DeFi from "./pages/VizPage/DataAPI/DeFi";
 import TrendingCoinData from "./pages/VizPage/DataAPI/TrendingNow";
 import Top10CoinData from "./pages/VizPage/DataAPI/TopCoins";
+import ContestPage from "./pages/ContestPage/ContestPage";
+import LeaderboardPage from "./pages/LeaderboardPage/LeaderboardPage";
 
 export default function App() {
 
@@ -50,14 +52,18 @@ export default function App() {
         <Route path="/trade/:code" element={<SymbolPage {...props} />} />
         <Route path="/assets" element={<AssetsPage props={props} />} />
         <Route path="/blog" element={<BlogPage {...props} />} />
-        <Route path="/viz" element={<VizPage {...props} />} />
-        
-        <Route path="/viz/fear_greed_data" element={<FearGreedData {...props} />}/>
-        <Route path="/viz/fear_greed_image" element={<FearGreedImage {...props} />}/>
-        <Route path="/viz/total_cap" element={<GlobalCapData {...props} />}/>
-        <Route path="/viz/defi" element={<DeFi {...props} />}/>
-        <Route path="/viz/top_coins" element={<Top10CoinData {...props} />}/>
-        <Route path="/viz/trending_coins" element={<TrendingCoinData {...props} />}/>
+        <Route path="/viz" element={<VizPage {...props} />} >
+          <Route path="/viz/fear_greed_data" element={<FearGreedData {...props} />} />
+          <Route path="/viz/fear_greed_image" element={<FearGreedImage {...props} />} />
+          <Route path="/viz/total_cap" element={<GlobalCapData {...props} />} />
+          <Route path="/viz/defi" element={<DeFi {...props} />} />
+          <Route path="/viz/top_coins" element={<Top10CoinData {...props} />} />
+          <Route path="/viz/trending_coins" element={<TrendingCoinData {...props} />} />
+        </Route>
+        <Route path="/contest" >
+          <Route path="/contest" element={<ContestPage />} />
+          <Route path="/contest/:id" element={<LeaderboardPage />} />
+        </Route>
       </Routes>
     </AppContainer>
   );
