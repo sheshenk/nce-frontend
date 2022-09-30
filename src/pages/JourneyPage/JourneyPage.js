@@ -73,7 +73,6 @@ export default function JourneyPage() {
             <Grid style={{ paddingTop: "80px" }}>
                 <Grid.Col span={4}>
                     <Stepper classNames={classes} active={active} orientation="vertical" breakpoint={755} style={{ margin: 'auto', width: '50%', marginTop: '50px', backgroundColor: "inherit" }}>
-                        {/* onStepClick={(p) => { setActive(p); setValue("step" + (p + 1)) }} */}
                         <Stepper.Step label="Step 1" description="Create an account" />
                         <Stepper.Step label="Step 2" description="Try paper trading" />
                         <Stepper.Step label="Step 3" description="Connect with APIs" />
@@ -104,7 +103,7 @@ export default function JourneyPage() {
                                 </div>
                                 <br />
                                 <div className="text-center" style={{ cursor: active > 0 ? 'not-allowed' : "pointer" }}>
-                                    <Link to="../register" className={active > 0 ? "btn-cta-can finlab-lite-a inverse inactive" : "btn-cta-can finlab-lite-a inverse"} data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" target="_blank" tabIndex="0">
+                                    <Link to="../register" className={active > 0 ? "btn-cta-can finlab-lite-a inverse inactive" : "btn-cta-can finlab-lite-a inverse"} data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
                                         Register Now</Link>
                                     <div className="cta-extra-text text-center">
                                     </div>
@@ -134,7 +133,7 @@ export default function JourneyPage() {
                                 </div>
                                 <br />
                                 <div className="text-center" onClick={() => changeStage({ variables: { userid: userid, stage: 2 } })}>
-                                    <Link to="../trade/btcusd" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" target="_blank" tabIndex="0">
+                                    <Link to="../trade/btcusd" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
                                         Try Now</Link>
                                     <div className="cta-extra-text text-center">
                                     </div>
@@ -164,7 +163,7 @@ export default function JourneyPage() {
                                 </div>
                                 <br />
                                 <div className="text-center" onClick={() => changeStage({ variables: { userid: userid, stage: 3 } })}>
-                                    <Link to="../trade/btcusd" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" target="_blank" tabIndex="0">
+                                    <Link to="../trade/btcusd" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
                                         Learn Now</Link>
                                     <div className="cta-extra-text text-center">
                                     </div>
@@ -189,12 +188,12 @@ export default function JourneyPage() {
                                     Details
                                 </div>
                                 <div className="can-desc">
-                                    - This will take you not more than 5 minutes.<br />
-                                    - If you encountered any difficulties, <b>contact NUS FinTech Lab for help</b>
+                                    - Compete with other well-developed trading bots and try to profit from the fierece market<br />
+                                    - Try your best to get a high return, but remember <b>the ranking will be calculated based on multiple metrics</b>
                                 </div>
                                 <br />
                                 <div className="text-center" onClick={() => changeStage({ variables: { userid: userid, stage: 4 } })}>
-                                    <Link to="../contest" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" target="_blank" tabIndex="0">
+                                    <Link to="../contest" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
                                         Join Now</Link>
                                     <div className="cta-extra-text text-center">
                                     </div>
