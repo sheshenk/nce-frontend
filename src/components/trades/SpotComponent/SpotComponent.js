@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client"
 import { Button, NumberInput, Select, SimpleGrid, Stack, Title } from "@mantine/core";
-import { useForm } from "@mantine/hooks";
+import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { CurrencyDollar, Hash } from "tabler-icons-react";
 import { ADD_ORDER_MUTATION } from "../../../queries/order";

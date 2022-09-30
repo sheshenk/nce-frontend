@@ -6,7 +6,6 @@ import { AUTH_TOKEN } from "../../../constants/authToken"
 import { LOGIN_MUTATION } from "../../../queries/auth"
 
 export default function LoginForm({ setIsLoginMode }) {
-
 	const form = useForm({
 		initialValues: {
 			email: '',
@@ -23,7 +22,7 @@ export default function LoginForm({ setIsLoginMode }) {
 			console.log(login.error)
 			if (login.response) {
 				localStorage.setItem(AUTH_TOKEN, login.response)
-				window.location.reload()
+				window.location.href = '/journey';
 			} else {
 				showNotification({
 					title: 'Login Failed',

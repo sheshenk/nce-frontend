@@ -1,5 +1,5 @@
 import { Table, Popover, NumberInput, Stack } from "@mantine/core";
-import { useForm } from "@mantine/hooks";
+import { useForm } from "@mantine/form";
 import React from "react";
 import { useMutation } from "@apollo/client";
 import { CANCEL_ORDER_MUTATION, MODIFY_ORDER_MUTATION } from "../../../queries/order.js";

@@ -7,7 +7,6 @@ import { AUTH_TOKEN } from "../../../constants/authToken"
 import { REGISTER_MUTATION } from "../../../queries/auth"
 
 export default function RegisterForm({ setIsLoginMode }) {
-
 	const [otpSent, setOtpSent] = useState(false)
 
 	const form = useForm({
@@ -28,7 +27,7 @@ export default function RegisterForm({ setIsLoginMode }) {
 			console.log(createUser.error)
 			if (createUser.response) {
 				localStorage.setItem(AUTH_TOKEN, createUser.response)
-				window.location.reload()
+				window.location.href = '/journey';
 			} else {
 				showNotification({
 					title: 'Register Failed',

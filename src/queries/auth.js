@@ -28,6 +28,18 @@ export const CURRENT_USER = gql`
 			email
 			phone
 			balance
+			learnstage
 		}
 	}
 `
+
+export const CHANGE_STAGE = gql`
+    mutation ChangeStage($userid: ID!, $stage: Int!) {
+        changeStage(userid: $userid, stage: $stage) {
+            status
+            response
+            error
+        }
+    }
+`
+

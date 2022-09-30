@@ -10,13 +10,21 @@ function dataFormat(d) {
 }
 
 export default function ContestPage() {
+    const [ranking, setRanking] = useState([{ Name: 'Alice', Rating: 98, Attended: 2 }, { Name: 'Bob', Rating: 45, Attended: 1 }, { Name: 'Carol', Rating: 0, Attended: 0 }])
     const [contests, setContests] = useState([])
+    const [update, setUpdate] = useState(true)
     const { loading: contestQueryloading, error: contestQueryError, data: contestQueryData } = useQuery(GET_CONTESTS)
     useEffect(() => {
         if (contestQueryloading) { }
         else if (contestQueryError) setContests([])
         else setContests(contestQueryData.getContests)
     }, [contestQueryloading, contestQueryError, contestQueryData])
+    setInterval(() => {
+        setUpdate(!update)
+    }, 60000)
+    useEffect(() => {
+        setRanking([...ranking, ranking[ranking.length - 1]])
+    }, [update, ranking])
     return (
         <>
             <Title order={2}>NUSwap Contest</Title>
@@ -56,7 +64,7 @@ export default function ContestPage() {
                     <List spacing="xl"
                         size="xl"
                         center>
-                        {[{ Name: 'Alice', Rating: 98, Attended: 2 }, { Name: 'Bob', Rating: 45, Attended: 1 }, { Name: 'Carol', Rating: 0, Attended: 0 }].map(({ Name, Rating, Attended }, index) =>
+                        {ranking.map(({ Name, Rating, Attended }, index) =>
                             <List.Item icon={
                                 <ThemeIcon variant="default" radius="xl" size="md" color="teal">
                                     {index + 1}
