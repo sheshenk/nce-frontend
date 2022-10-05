@@ -67,7 +67,7 @@ export default function App() {
           </Route>
           <Route path="/contest" >
             <Route path="/contest" element={<ContestPage />} />
-            <Route path="/contest/:id" element={<LeaderboardPage />} />
+            <Route path="/contest/:name" element={<LeaderboardPage {...props} />} />
           </Route>
         </Route>
       </Routes>

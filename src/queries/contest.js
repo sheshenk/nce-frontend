@@ -1,13 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_PARTICIPANTS = gql`
-	query GetParticipants($contestid: ID!) {
-		getParticipants(contestid:$contestid) {
+	query GetParticipants($contestname: String!, $userid: ID!) {
+		getParticipants(contestname:$contestname, userid:$userid) {
 			userid
 			name
 			return
-			sharpe_ratio
 			maxdrawdown
+			pltrend
 		}
 	}
 `
@@ -24,3 +24,11 @@ export const GET_CONTESTS = gql`
 		}
 	}
 `
+
+// export const GET_PARTICIPANT_PL = gql`
+// 	query GetParticipantPL($contestName: string!, userid: ID!) {
+// 		getParticipantPL(contestName:$contestName, userid:$userid){
+// 			pl
+// 		}
+// 	}
+// `

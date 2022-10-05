@@ -1,0 +1,30 @@
+a {
+    text-decoration: "none"
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.back-to-contest {
+    font-weight: 500;
+    font-size: '16px';
+}
+
+.callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-color: #5bc0de;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.callout-info h4 {
+    color: #5bc0de;
+}
+
+.callout h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}

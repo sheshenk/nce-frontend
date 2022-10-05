@@ -1,5 +1,5 @@
 import { SimpleGrid, Stack, Title } from "@mantine/core";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SymbolCard from "../../components/trades/SymbolCard/SymbolCard";
 import { AUTH_TOKEN } from "../../constants/authToken";
 import { SYMBOLS } from "../../constants/symbols";
