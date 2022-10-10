@@ -19,6 +19,7 @@ import TrendingCoinData from "./pages/VizPage/DataAPI/TrendingNow";
 import Top10CoinData from "./pages/VizPage/DataAPI/TopCoins";
 import ContestPage from "./pages/ContestPage/ContestPage";
 import LeaderboardPage from "./pages/LeaderboardPage/LeaderboardPage";
+import NewsPage from "./pages/NewsPage/NewsPage";
 
 export default function App() {
 
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/contest" element={<ContestPage />} />
           <Route path="/contest/:id" element={<LeaderboardPage />} />
         </Route>
+        <Route path="/news" element={<NewsPage {...props} />} />
       </Routes>
     </AppContainer>
   );

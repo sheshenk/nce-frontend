@@ -4,6 +4,7 @@ import OrderBook from "../../components/symbol-chart/OrderBook/OrderBook"
 import SymbolChart from "../../components/symbol-chart/SymbolChart/SymbolChart"
 import SpotComponent from "../../components/trades/SpotComponent/SpotComponent"
 import UserOrdersComponent from "../../components/trades/UserOrdersComponent/UserOrdersComponent"
+import SymbolNewsComponent from "../../components/news/SymbolNewsComponent/SymbolNewsComponent"
 import { SYMBOLS } from "../../constants/symbols"
 
 export default function SymbolPage(props) {
@@ -21,6 +22,10 @@ export default function SymbolPage(props) {
 				<OrderBook symbol={symbol.code} />
 				<SpotComponent symbol={symbol.code} ownerId={parseInt(props.user.userid)} walletId={parseInt(props.user.userid)} />
 				<UserOrdersComponent symbol={symbol.code} owner={props.user.userid}/>
+			</Group>
+			<Group>
+				<Title order={2}>{symbol.name} News</Title>
+				<SymbolNewsComponent symbol={symbol.code}/>
 			</Group>
 
 		</Stack>
