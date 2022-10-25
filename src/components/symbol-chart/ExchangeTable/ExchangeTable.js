@@ -2,9 +2,9 @@ import { Table } from "@mantine/core";
 import React, { Component } from "react";
 
 export class ExchangeTable extends Component {
-  componentDidMount() {
-    this.props.subscribeToNewOrderBook();
-  }
+  // componentDidMount() {
+  //   this.props.subscribeToNewOrderBook();
+  // }
   render() {
     return (
       <Table verticalSpacing='xs' highlightOnHover>
@@ -19,15 +19,11 @@ export class ExchangeTable extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.arr && this.props.arr.slice(0, 4).map((item, index) => (
+          {this.props.arr && this.props.arr.map((item, index) => (
             <tr key={index}>
-              <td > {Math.round(Number(item[1]) * 1000) / 1000} </td>
+              <td > {Number(item[1]).toFixed(5).substring(0, 7)} </td>
               <td style={{ color: this.props.color }}> {item[0]} </td>
-              <td>
-                {
-                  Math.round(Number(item[1]) * Number(item[0]) * 1000) / 1000
-                }
-              </td>
+              <td>{(Number(item[1]) * Number(item[0])).toFixed(5).substring(0, 7)}</td>
             </tr>
           ))}
         </tbody>

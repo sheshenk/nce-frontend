@@ -46,8 +46,8 @@ export default function OpenOrdersTableGenerator({ DataObject, title, symbol, si
                     <th colSpan="2">{title}</th>
                 </tr>
                 <tr key={"header"}>
-                    {Object.keys(DataObject[0]).map((key) => (
-                        <th>{key}</th>
+                    {Object.keys(DataObject[0]).map((key, index) => (
+                        <th key={index}>{key}</th>
                     ))}
                     <th>Operations</th>
                 </tr>

@@ -16,13 +16,12 @@ export default function SymbolPage(props) {
 				{symbol.icon}
 				<Title order={2}>Trade {symbol.name} ({symbol.symbol})</Title>
 			</Group>
-			<Group spacing={48} align='baseline'>
+			< Group spacing={48} align='baseline'>
 				<SymbolChart symbol={symbol} />
 				<OrderBook symbol={symbol.code} />
 				<SpotComponent symbol={symbol.code} ownerId={parseInt(props.user.userid)} walletId={parseInt(props.user.userid)} />
-				<UserOrdersComponent symbol={symbol.code} owner={props.user.userid}/>
+				<UserOrdersComponent symbol={symbol.code} owner={props.user.userid} />
 			</Group>
-
-		</Stack>
+		</Stack >
 	)
 }
