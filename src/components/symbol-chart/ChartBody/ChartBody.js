@@ -40,8 +40,8 @@ const ChartBody = ({ symbol, interval, type }) => {
 								// finchartData.pop()
 								// finchartData.push({ ...res.candlestick, time: new Date(parseInt(res.candlestick.time)) })
 								// finchartData.push({ ...res.candlestick, time: new Date(res.candlestick.time) })
-								var cur_date = res.candlestick.time
-								var date_exist = finchartData.some(data => data.name === cur_date)
+								var cur_date = new Date(res.candlestick.time)
+								var date_exist = finchartData.some(data => data.time == cur_date)
 								console.log(date_exist, res, finchartData)
 								if(date_exist)
 									{
