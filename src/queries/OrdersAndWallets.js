@@ -48,6 +48,7 @@ export const WALLET_ASSETS_USER_QUERY = gql`
         walletid
         symbol
         amount
+        locked
     }
     }
 `

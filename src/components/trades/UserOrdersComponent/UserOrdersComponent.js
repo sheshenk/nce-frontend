@@ -91,10 +91,10 @@ const UserOrdersComponent = ({ symbol, owner }) => {
           <ClosedOrdersTableGenerator DataObject={closedOrders} title={"CLOSED ORDERS"} />
         }
         {openAskOrders.length > 0 &&
-          <OpenOrdersTableGenerator DataObject={openAskOrders} title={"OPEN ASK ORDERS"} symbol={symbol} side={'ask'} />
+          <OpenOrdersTableGenerator DataObject={openAskOrders} title={"OPEN ASK ORDERS"} symbol={symbol} side={'SELL'} />
         }
         {openBidOrders.length > 0 &&
-          <OpenOrdersTableGenerator DataObject={openBidOrders} title={"OPEN BID ORDERS"} symbol={symbol} side={'bid'} />
+          <OpenOrdersTableGenerator DataObject={openBidOrders} title={"OPEN BID ORDERS"} symbol={symbol} side={'BUY'} />
         }
       </Stack>
     </div>

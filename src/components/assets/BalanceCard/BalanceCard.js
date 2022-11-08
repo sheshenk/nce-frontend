@@ -1,4 +1,4 @@
-import { Button, Card, Divider, NumberInput, Space, Stack, Text, Title } from "@mantine/core";
+import { Button, Card, Divider, Grid, NumberInput, Space, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { CurrencyDollar } from "tabler-icons-react";
 import { GET_USER_BALANCE, ADD_BALANCE_MUTATION } from '../../../queries/OrdersAndWallets'
@@ -9,7 +9,8 @@ import { showNotification } from "@mantine/notifications"
 
 export default function BalanceCard({ userid }) {
 
-	const [userBalance, setUserBalance] = useState([])
+	const [userBalance, setUserBalance] = useState(0)
+	const [userLocked, setUserLocked] = useState(0)
 	const { loading: queryloading, error: queryError, data: queryData } = useQuery(GET_USER_BALANCE,
 		{ variables: { userid } }
 	);
@@ -41,7 +42,8 @@ export default function BalanceCard({ userid }) {
 		try {
 			if (queryData !== undefined && queryData.getUserBalance) {
 				const res = queryData.getUserBalance
-				setUserBalance(res)
+				setUserBalance(res[0])
+				setUserLocked(res[1])
 			}
 		} catch (error) { }
 	}, [userid, queryloading, queryError, queryData])
@@ -53,9 +55,18 @@ export default function BalanceCard({ userid }) {
 	return (
 		<Card withBorder>
 			<Stack spacing={6}>
-				<Title order={5}>Balance</Title>
-				<Text size='xl'>${userBalance}</Text>
-				{/* <Text>{userid}</Text> */}
+				<Grid>
+					<Grid.Col>
+						<Title order={5}>Balance</Title>
+						<Text size='xl'>${userBalance}</Text>
+					</Grid.Col>
+					<Grid.Col>
+						{/* <Text>{userid}</Text> */}
+						<Title order={5}>Locked</Title>
+						<Text size='xl'>${userLocked}</Text>
+					</Grid.Col>
+				</Grid>
+
 				<Space />
 				<Text size="xs">As of 4 June 2022</Text>
 			</Stack>

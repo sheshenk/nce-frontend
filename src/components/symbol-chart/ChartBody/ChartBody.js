@@ -1,5 +1,5 @@
 // import { useQuery, useSubscription } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BarSeries, CandlestickSeries, Chart, ChartCanvas, CrossHairCursor, EdgeIndicator, LineSeries, MouseCoordinateY, OHLCTooltip, XAxis, YAxis } from 'react-financial-charts'
 // import { MARKET_HISTORY_QUERY, MARKET_HISTORY_SUBSCRIPTION } from '../../../queries/market-history'
 // import { REAL_MARKET_HISTORY_QUERY } from '../../../queries/realMarketHistory'

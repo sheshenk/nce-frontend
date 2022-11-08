@@ -1,9 +1,8 @@
-import { useMutation } from "@apollo/client"
-import { Button, LoadingOverlay, NumberInput, Select, SimpleGrid, Stack, Title } from "@mantine/core";
+import { Button, LoadingOverlay, Notification, NumberInput, Select, SimpleGrid, Stack, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { CurrencyDollar, Hash } from "tabler-icons-react";
-import { ADD_ORDER_MUTATION } from "../../../queries/order";
+import { IconCheck, IconX } from '@tabler/icons';
 
 const modes = [
 	{
@@ -25,6 +24,7 @@ export default function SpotComponent(props) {
 	const [isLoading, setIsLoading] = useState(false);
 	// const [err, setErr] = useState('');
 	const [mode, setMode] = useState(modes[0].mode)
+	const [notification, setNotification] = useState(null)
 
 	const form = useForm({
 		initialValues: {
@@ -34,23 +34,6 @@ export default function SpotComponent(props) {
 		}
 	})
 
-	const [placeOrder] = useMutation(ADD_ORDER_MUTATION, {
-		variables: {
-			symbol: props.symbol,
-			type: form.values.orderType,
-			side: mode,
-			quantity: form.values.qty,
-			price: form.values.price,
-			ownerId: props.ownerId,
-			walletId: props.walletId
-		},
-		onCompleted: ({ createOrder }) => {
-			if (createOrder.response) {
-				console.log(createOrder.response)
-				// window.location.reload()
-			}
-		}
-	})
 	// Message format:
 	// -   Add, Symbol, Type, Side, Quantity, Price, Owner ID, Wallet ID, Stop Price (Optional)
 	//     add ETHUSD limit ask 100 64000 user1 Alice1 (60000)
@@ -78,18 +61,26 @@ export default function SpotComponent(props) {
 	// }
 	const placeOrderHandler = async () => {
 		setIsLoading(true);
+		setNotification(
+			<Notification
+				loading
+				title="Sending order request to server"
+				disallowClose
+			>
+				Please wait until order is send
+			</Notification>
+		)
 		try {
 			const response = await fetch('http://localhost:8000/order', {
 				method: 'POST',
 				body: JSON.stringify({
-					operation: "ADD",
 					symbol: props.symbol,
 					type: form.values.orderType,
 					side: mode,
 					quantity: form.values.qty,
 					price: form.values.price,
-					owner_Id: toString(props.ownerId),
-					wallet_Id: toString(props.walletId)
+					owner_id: props.ownerId.toString(),
+					wallet_id: props.walletId.toString()
 				}),
 				headers: {
 					'Content-Type': 'application/json',
@@ -102,10 +93,19 @@ export default function SpotComponent(props) {
 			}
 
 			const result = await response.json();
-
+			setNotification(
+				<Notification icon={<IconCheck size={18} />} color="teal" title="Place order successful" onClose={() => { setNotification(null) }}>
+					Order is added to the order book
+				</Notification>
+			)
 			console.log('result is: ', JSON.stringify(result, null, 4));
 		} catch (err) {
 			console.log(err.message);
+			setNotification(
+				<Notification icon={<IconX size={18} />} color="red" onClose={() => { setNotification(null) }}>
+					Error! {err.message}
+				</Notification>
+			)
 		} finally {
 			setIsLoading(false);
 		}
@@ -113,6 +113,7 @@ export default function SpotComponent(props) {
 
 	return (
 		<Stack>
+			{notification}
 			<LoadingOverlay visible={isLoading} overlayBlur={2} />
 			<Title order={3}>Spot</Title>
 			<SimpleGrid cols={3}>
@@ -121,7 +122,8 @@ export default function SpotComponent(props) {
 			<Select value="" {...form.getInputProps('orderType')} data={['Limit', 'Market']} />
 			{form.values.orderType === 'Limit' && <NumberInput label="Order Price" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={1000000} icon={<CurrencyDollar size={18} />} {...form.getInputProps('price')} />}
 			<NumberInput label="Quantity" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<Hash size={18} />} {...form.getInputProps('qty')} />
-			<Button size="md" onClick={() => { placeOrderHandler(); placeOrder().catch((error) => { console.log(JSON.stringify(error, null, 2)); }) }}>{mode} Now</Button>
+			<Button size="md" onClick={() => { placeOrderHandler(); }}>{mode} Now</Button>
+			{/* placeOrder().catch((error) => { console.log(JSON.stringify(error, null, 2)); }) */}
 		</Stack >
 	)
 }
