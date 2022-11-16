@@ -1,14 +1,13 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from "@mantine/core";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { CLOSED_ORDER_USER_QUERY, OPEN_ASK_ORDER_USER_QUERY, OPEN_BID_ORDER_USER_QUERY } from '../../../queries/OrdersAndWallets'
 import ClosedOrdersTableGenerator from '../TableGenerator/ClosedOrdersTableGenerator'
 import OpenOrdersTableGenerator from '../TableGenerator/OpenOrdersTableGenerator';
 
-const UserOrdersComponent = ({ symbol, owner }) => {
-  const [closedOrders, setClosedOrders] = useState([])
-  const { loading: closeQueryloading, error: closeQueryError, data: closeQueryData } = useQuery(CLOSED_ORDER_USER_QUERY, { variables: { symbol, owner } }
-  );
+const UserOrdersComponent = ({ symbol, owner, closedOrders, setClosedOrders, openAskOrders, setOpenAskOrders, openBidOrders, setOpenBidOrders }) => {
+
+  const { loading: closeQueryloading, error: closeQueryError, data: closeQueryData } = useQuery(CLOSED_ORDER_USER_QUERY, { variables: { symbol, owner } });
 
   useEffect(() => {
     try {
@@ -35,11 +34,10 @@ const UserOrdersComponent = ({ symbol, owner }) => {
         setClosedOrders(R5)
       }
     } catch (error) { }
-  }, [symbol, closeQueryloading, closeQueryError, closeQueryData])
+  }, [symbol, closeQueryloading, closeQueryError, closeQueryData, setClosedOrders])
 
-  const [openAskOrders, setOpenAskOrders] = useState([])
-  const { loading: openAskQueryloading, error: openAskQueryError, data: openAskQueryData } = useQuery(OPEN_ASK_ORDER_USER_QUERY, { variables: { symbol, owner } }
-  );
+
+  const { loading: openAskQueryloading, error: openAskQueryError, data: openAskQueryData } = useQuery(OPEN_ASK_ORDER_USER_QUERY, { variables: { symbol, owner } });
 
   useEffect(() => {
     try {
@@ -57,11 +55,9 @@ const UserOrdersComponent = ({ symbol, owner }) => {
         setOpenAskOrders(R4)
       }
     } catch (error) { }
-  }, [symbol, openAskQueryloading, openAskQueryError, openAskQueryData])
+  }, [symbol, openAskQueryloading, openAskQueryError, openAskQueryData, setOpenAskOrders])
 
-  const [openBidOrders, setOpenBidOrders] = useState([])
-  const { loading: openBidQueryloading, error: openBidQueryError, data: openBidQueryData } = useQuery(OPEN_BID_ORDER_USER_QUERY, { variables: { symbol, owner } }
-  );
+  const { loading: openBidQueryloading, error: openBidQueryError, data: openBidQueryData } = useQuery(OPEN_BID_ORDER_USER_QUERY, { variables: { symbol, owner } });
 
   useEffect(() => {
     try {
@@ -75,11 +71,11 @@ const UserOrdersComponent = ({ symbol, owner }) => {
           return { ...rest, open_quantity, fill_cost, created_at, updated_at }
         }
         );
-        // console.log("OPEN BID R4", R4)
+        console.log("OPEN BID R4", R4)
         setOpenBidOrders(R4)
       }
     } catch (error) { }
-  }, [symbol, openBidQueryloading, openBidQueryError, openBidQueryData])
+  }, [symbol, openBidQueryloading, openBidQueryError, openBidQueryData, setOpenBidOrders])
 
   // console.log(closedOrders.length, openAskOrders.length, openBidOrders.length)
 
@@ -91,10 +87,10 @@ const UserOrdersComponent = ({ symbol, owner }) => {
           <ClosedOrdersTableGenerator DataObject={closedOrders} title={"CLOSED ORDERS"} />
         }
         {openAskOrders.length > 0 &&
-          <OpenOrdersTableGenerator DataObject={openAskOrders} title={"OPEN ASK ORDERS"} symbol={symbol} side={'SELL'} />
+          <OpenOrdersTableGenerator owner={owner} DataObject={openAskOrders} setAsks={setOpenAskOrders} setBids={setOpenBidOrders} setClosed={setClosedOrders} title={"OPEN ASK ORDERS"} symbol={symbol} side={'SELL'} />
         }
         {openBidOrders.length > 0 &&
-          <OpenOrdersTableGenerator DataObject={openBidOrders} title={"OPEN BID ORDERS"} symbol={symbol} side={'BUY'} />
+          <OpenOrdersTableGenerator owner={owner} DataObject={openBidOrders} setAsks={setOpenAskOrders} setBids={setOpenBidOrders} setClosed={setClosedOrders} title={"OPEN BID ORDERS"} symbol={symbol} side={'BUY'} />
         }
       </Stack>
     </div>

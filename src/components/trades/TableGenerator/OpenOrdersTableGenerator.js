@@ -6,8 +6,10 @@ import React from "react";
 import { useState } from 'react';
 import { CurrencyDollar, Hash } from "tabler-icons-react";
 import { IconCheck, IconX } from '@tabler/icons';
+import { getOrderHandler } from "../../../services/orderHandlers";
+import { timeFormat } from "react-financial-charts";
 
-export default function OpenOrdersTableGenerator({ DataObject, title, symbol, side }) {
+export default function OpenOrdersTableGenerator({ owner, DataObject, setAsks, setBids, setClosed, title, symbol, side }) {
     const visibility = {};
     for (let i = 0; i < DataObject.length; i++) {
         visibility[DataObject[i].orderid] = false;
@@ -42,6 +44,7 @@ export default function OpenOrdersTableGenerator({ DataObject, title, symbol, si
     //         }
     //     }
     // })
+
 
     const modifyOrderHandler = async (symbol, side, orderId, prevQuantity, prevPrice, newQuantity, newPrice) => {
         setIsLoading(true);
@@ -92,6 +95,7 @@ export default function OpenOrdersTableGenerator({ DataObject, title, symbol, si
             )
         } finally {
             setIsLoading(false);
+            getOrderHandler(owner, symbol, setAsks, setBids, setClosed)
         }
     };
 
@@ -127,7 +131,7 @@ export default function OpenOrdersTableGenerator({ DataObject, title, symbol, si
 
             const result = await response.json();
             setNotification(
-                <Notification icon={<IconCheck size={18} />} color="teal" title="Modify order successful" onClose={() => { setNotification(null) }}>
+                <Notification icon={<IconCheck size={18} />} color="teal" title="Cancel order successful" onClose={() => { setNotification(null) }}>
                     Order is canceled and removed from the order book
                 </Notification>
             )
@@ -141,6 +145,7 @@ export default function OpenOrdersTableGenerator({ DataObject, title, symbol, si
             )
         } finally {
             setIsLoading(false);
+            getOrderHandler(owner, symbol, setAsks, setBids, setClosed)
         }
     };
 

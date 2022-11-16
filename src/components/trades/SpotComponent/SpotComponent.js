@@ -3,6 +3,7 @@ import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { CurrencyDollar, Hash } from "tabler-icons-react";
 import { IconCheck, IconX } from '@tabler/icons';
+import { getOrderHandler } from "../../../services/orderHandlers";
 
 const modes = [
 	{
@@ -108,6 +109,7 @@ export default function SpotComponent(props) {
 			)
 		} finally {
 			setIsLoading(false);
+			getOrderHandler(props.ownerId.toString(), props.symbol, props.setOpenAskOrders, props.setOpenBidOrders, props.setClosedOrders)
 		}
 	};
 
