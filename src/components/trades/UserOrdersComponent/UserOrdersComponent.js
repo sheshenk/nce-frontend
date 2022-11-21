@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { Stack } from "@mantine/core";
 import React, { useEffect } from "react";
 import { CLOSED_ORDER_USER_QUERY, OPEN_ASK_ORDER_USER_QUERY, OPEN_BID_ORDER_USER_QUERY } from '../../../queries/OrdersAndWallets'
+import { getOrderHandler } from '../../../services/orderHandlers';
 import ClosedOrdersTableGenerator from '../TableGenerator/ClosedOrdersTableGenerator'
 import OpenOrdersTableGenerator from '../TableGenerator/OpenOrdersTableGenerator';
 
@@ -79,6 +80,9 @@ const UserOrdersComponent = ({ symbol, owner, closedOrders, setClosedOrders, ope
 
   // console.log(closedOrders.length, openAskOrders.length, openBidOrders.length)
 
+  useEffect(() => {
+    getOrderHandler(owner, symbol, setOpenAskOrders, setOpenBidOrders, setClosedOrders)
+  }, [owner, symbol, setOpenAskOrders, setOpenBidOrders, setClosedOrders])
 
   return (
     <div>

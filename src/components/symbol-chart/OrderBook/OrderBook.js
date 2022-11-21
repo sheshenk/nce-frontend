@@ -35,9 +35,11 @@ const OrderBook = ({ symbol }) => {
 
   const [asks, setAsks] = useState([])
   const [bids, setBids] = useState([])
-  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8000/realorderbook");
-
-  sendMessage(JSON.stringify({ product_id: symbol.toUpperCase() }))
+  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8000/realorderbook",
+    {
+      onOpen: () => sendMessage(JSON.stringify({ product_id: symbol.toUpperCase() })),
+      shouldReconnect: (closeEvent) => true
+    });
 
   useEffect(() => {
     if (lastMessage !== null) {

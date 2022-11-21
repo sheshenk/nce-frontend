@@ -121,7 +121,8 @@ export default function SpotComponent(props) {
 			<SimpleGrid cols={3}>
 				{modes.map((m, index) => <Button key={index} size="xs" onClick={() => setMode(m.mode)} variant={m.mode === mode ? 'filled' : 'light'}>{m.mode}</Button>)}
 			</SimpleGrid>
-			<Select value="" {...form.getInputProps('orderType')} data={['Limit', 'Market']} />
+			{/* { value: 'React', label: 'React' }, */}
+			<Select value="" {...form.getInputProps('orderType')} data={[{ value: 'Limit', label: 'Limit' }, { value: 'Market', label: 'Market' }]} />
 			{form.values.orderType === 'Limit' && <NumberInput label="Order Price" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={1000000} icon={<CurrencyDollar size={18} />} {...form.getInputProps('price')} />}
 			<NumberInput label="Quantity" defaultValue={0.05} precision={2} min={0.01} step={0.05} max={100} icon={<Hash size={18} />} {...form.getInputProps('qty')} />
 			<Button size="md" onClick={() => { placeOrderHandler(); }}>{mode} Now</Button>
