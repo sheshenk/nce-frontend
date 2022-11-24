@@ -4,6 +4,11 @@ import { useForm } from "@mantine/form"
 import { showNotification } from "@mantine/notifications"
 import { AUTH_TOKEN } from "../../../constants/authToken"
 import { LOGIN_MUTATION } from "../../../queries/auth"
+import { createHash } from 'crypto';
+
+function hash(string) {
+	return createHash('sha256').update(string).digest('hex');
+}
 
 export default function LoginForm({ setIsLoginMode }) {
 	const form = useForm({
@@ -16,7 +21,7 @@ export default function LoginForm({ setIsLoginMode }) {
 	const [startLogin] = useMutation(LOGIN_MUTATION, {
 		variables: {
 			email: form.values.email,
-			password: form.values.password
+			password: hash(form.values.password)
 		},
 		onCompleted: ({ login }) => {
 			console.log(login.error)

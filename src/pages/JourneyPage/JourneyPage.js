@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Grid, Stepper, Accordion, Title, createStyles } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Circle1, Circle2, Circle3, Circle4, CircleCheck } from 'tabler-icons-react';
 import { CHANGE_STAGE, CURRENT_USER } from "../../queries/auth";
 import "./JourneyPage.css"
@@ -47,18 +47,28 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function JourneyPage() {
-    const { loading, error, data } = useQuery(CURRENT_USER)
-
+    const { loading, error, data, refetch } = useQuery(CURRENT_USER)
+    const navigate = useNavigate()
+    const location = useLocation()
     const [active, setActive] = useState(1);
     const { classes } = useStyles();
     const [value, setValue] = useState("step1");
     const [userid, setUserid] = useState(null);
 
     useEffect(() => {
+        refetch()
+    }, [])
+
+    useEffect(() => {
         if (loading) console.log('Loading user...')
         else if (error) { setActive(0); setValue('step1') }
-        else { setUserid(data.currentUser.userid); setActive(data.currentUser.learnstage); setValue("step" + (data.currentUser.learnstage + 1)) }
-    }, [loading, error, data])
+        else {
+            if (!data.currentUser) {
+                setActive(0); setValue('step1')
+            }
+            setUserid(data.currentUser.userid); setActive(data.currentUser.learnstage); setValue("step" + (data.currentUser.learnstage + 1))
+        }
+    }, [loading, error, data, location.pathname])
 
     const [changeStage] = useMutation(CHANGE_STAGE, {
         onCompleted: ({ changeStage }) => {
@@ -132,7 +142,12 @@ export default function JourneyPage() {
                                     - Check your initial wallet in Asset page, <b>top up your balance if you need</b>
                                 </div>
                                 <br />
-                                <div className="text-center" onClick={() => changeStage({ variables: { userid: userid, stage: 2 } })}>
+                                <div className="text-center" onClick={() => {
+                                    if (!data) {
+                                        navigate("/register")
+                                    }
+                                    changeStage({ variables: { userid: userid, stage: 2 } })
+                                }}>
                                     <Link to="../trade/btcusd" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
                                         Try Now</Link>
                                     <div className="cta-extra-text text-center">
@@ -162,8 +177,13 @@ export default function JourneyPage() {
                                     - If you encountered any difficulties, <b>contact NUS FinTech Lab for help</b>
                                 </div>
                                 <br />
-                                <div className="text-center" onClick={() => changeStage({ variables: { userid: userid, stage: 3 } })}>
-                                    <Link to="../trade/btcusd" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
+                                <div className="text-center" onClick={() => {
+                                    if (!data) {
+                                        navigate("/register")
+                                    }
+                                    changeStage({ variables: { userid: userid, stage: 3 } })
+                                }}>
+                                    <Link to="../assets" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
                                         Learn Now</Link>
                                     <div className="cta-extra-text text-center">
                                     </div>
@@ -181,7 +201,7 @@ export default function JourneyPage() {
                                 </div>
                                 <div className="can-desc">
                                     <h3>Contest every week</h3>
-                                    compete and see your ranking!
+                                    to compete and see your ranking!
                                 </div>
                                 <br />
                                 <div className="accordion-lbl-small">
@@ -192,7 +212,12 @@ export default function JourneyPage() {
                                     - Try your best to get a high return, but remember <b>the ranking will be calculated based on multiple metrics</b>
                                 </div>
                                 <br />
-                                <div className="text-center" onClick={() => changeStage({ variables: { userid: userid, stage: 4 } })}>
+                                <div className="text-center" onClick={() => {
+                                    if (!data) {
+                                        navigate("/register")
+                                    }
+                                    changeStage({ variables: { userid: userid, stage: 4 } })
+                                }}>
                                     <Link to="../contest" className="btn-cta-can finlab-lite-a inverse" data-stepid="1" data-stepparent="1" data-steptotal="1" data-parentid="collapseOne" tabIndex="0">
                                         Join Now</Link>
                                     <div className="cta-extra-text text-center">

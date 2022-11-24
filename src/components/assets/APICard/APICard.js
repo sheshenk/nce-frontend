@@ -1,4 +1,4 @@
-import { Card, Stack, Title} from "@mantine/core";
+import { Anchor, Card, Stack, Text, Title } from "@mantine/core";
 import { Button } from '@mantine/core';
 import { useClipboard } from '@mantine/hooks';
 import { ScrollArea } from '@mantine/core';
@@ -8,9 +8,9 @@ import { AUTH_TOKEN } from "../../../constants/authToken";
 export default function APICard() {
     const token = String(localStorage.getItem(AUTH_TOKEN));
     // console.log("TOKEN",token)
-	// return (
+    // return (
     //     <div><Text size="xs">{token}</Text></div>
-	// )
+    // )
 
     const clipboard = useClipboard({ timeout: 500 });
     console.log(token)
@@ -22,7 +22,7 @@ export default function APICard() {
                 </Title>
             </Stack>
             <Stack>
-                <ScrollArea style={{ width: 525}}>
+                <ScrollArea style={{ width: 525 }}>
                     {token}
                 </ScrollArea>
             </Stack>
@@ -32,8 +32,14 @@ export default function APICard() {
                     onClick={() => clipboard.copy(token)}>
                     {clipboard.copied ? 'Copied' : 'Copy'}
                 </Button>
+                <Text>
+                    Checkout the
+                    <Anchor href="http://localhost:8000/apidoc" target="_blank"> API doc
+                    </Anchor> and an <Anchor href="http://localhost:8000/connector" target="_blank"> example connector
+                    </Anchor>
+                </Text>
             </Stack>
-        </Card>
-      
+        </Card >
+
     );
 }

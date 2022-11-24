@@ -3,29 +3,26 @@ import { Grid, Stack, Title } from "@mantine/core";
 import AssetsTable from "../../components/assets/AssetsTable/AssetsTable";
 import BalanceCard from "../../components/assets/BalanceCard/BalanceCard";
 import APICard from "../../components/assets/APICard/APICard";
+import PLTrend from "../../components/assets/PLTrend/PLTrend";
 
 
-export default function AssetsPage({props}) {
+export default function AssetsPage({ props }) {
 
 	return (
 		<Stack p={24}>
 			<Title order={2}>Your Assets</Title>
 			<Grid columns={24}>
+				<Grid.Col span={8}>
+					<BalanceCard userid={props.user.userid} />
+				</Grid.Col>
 				<Grid.Col span={16}>
-					<Grid columns={24}>
-						{/* <Grid.Col md={24}>
-							<AssetsChart/>
-						</Grid.Col> */}
-						<Grid.Col md={24}>
-							<AssetsTable walletid={props.user.userid}/>
-						</Grid.Col>
-					</Grid>
+					<PLTrend userid={props.user.userid} />
 				</Grid.Col>
-				<Grid.Col span={8}>
-				{<BalanceCard userid={props.user.userid}/>}
+				<Grid.Col span={12}>
+					<AssetsTable walletid={props.user.userid} />
 				</Grid.Col>
-				<Grid.Col span={8}>
-				{<APICard />}
+				<Grid.Col span={12}>
+					<APICard />
 				</Grid.Col>
 			</Grid>
 		</Stack>

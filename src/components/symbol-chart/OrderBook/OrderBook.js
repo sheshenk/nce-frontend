@@ -35,7 +35,7 @@ const OrderBook = ({ symbol }) => {
 
   const [asks, setAsks] = useState([])
   const [bids, setBids] = useState([])
-  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8000/realorderbook",
+  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8000/orderbook",
     {
       onOpen: () => sendMessage(JSON.stringify({ product_id: symbol.toUpperCase() })),
       shouldReconnect: (closeEvent) => true

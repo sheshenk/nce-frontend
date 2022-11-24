@@ -5,6 +5,11 @@ import { showNotification } from "@mantine/notifications"
 import { useState } from "react"
 import { AUTH_TOKEN } from "../../../constants/authToken"
 import { REGISTER_MUTATION } from "../../../queries/auth"
+import { createHash } from 'crypto';
+
+function hash(string) {
+	return createHash('sha256').update(string).digest('hex');
+}
 
 export default function RegisterForm({ setIsLoginMode }) {
 	const [otpSent, setOtpSent] = useState(false)
@@ -21,7 +26,7 @@ export default function RegisterForm({ setIsLoginMode }) {
 		variables: {
 			name: form.values.name,
 			email: form.values.email,
-			password: form.values.password
+			password: hash(form.values.password)
 		},
 		onCompleted: ({ createUser }) => {
 			console.log(createUser.error)

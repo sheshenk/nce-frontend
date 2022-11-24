@@ -17,7 +17,7 @@ export default function AssetsTable({ walletid }) {
 		try {
 			if (queryData !== undefined && queryData.getWalletAssetsWalletID) {
 				const res = queryData.getWalletAssetsWalletID
-				const R2 = res.map(({ symbol, amount, locked, ...del_attrs }) => ({ symbol, amount, locked }))
+				const R2 = res.map(({ symbol, amount, locked, ...del_attrs }) => ({ symbol: symbol.substring(0, 3).toUpperCase(), amount, locked }))
 				// console.log(res)
 				// console.log(R2)
 				setWalletAssets(R2)

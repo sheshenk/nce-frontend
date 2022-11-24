@@ -14,10 +14,6 @@ const modes = [
 		mode: 'Sell',
 		component: <div>Sell</div>
 	},
-	{
-		mode: 'Convert',
-		component: <div>Convert</div>
-	},
 ]
 
 export default function SpotComponent(props) {
@@ -120,6 +116,7 @@ export default function SpotComponent(props) {
 			<Title order={3}>Spot</Title>
 			<SimpleGrid cols={3}>
 				{modes.map((m, index) => <Button key={index} size="xs" onClick={() => setMode(m.mode)} variant={m.mode === mode ? 'filled' : 'light'}>{m.mode}</Button>)}
+				<Button disabled size="xs" variant='light'>Convert</Button>
 			</SimpleGrid>
 			{/* { value: 'React', label: 'React' }, */}
 			<Select value="" {...form.getInputProps('orderType')} data={[{ value: 'Limit', label: 'Limit' }, { value: 'Market', label: 'Market' }]} />

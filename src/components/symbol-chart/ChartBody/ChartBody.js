@@ -10,7 +10,7 @@ import { Text } from '@mantine/core'
 
 const ChartBody = ({ symbol, interval, type }) => {
 	const [finchartData, setFinchartData] = useState([])
-	const { sendJsonMessage, readyState } = useWebSocket("ws://localhost:8000/realmarkethistory",
+	const { sendJsonMessage, readyState } = useWebSocket("ws://localhost:8000/markethistory",
 		{
 			onOpen: () => sendJsonMessage({ product_id: symbol.toUpperCase() }),
 			//Will attempt to reconnect on all close events, such as server shutting down

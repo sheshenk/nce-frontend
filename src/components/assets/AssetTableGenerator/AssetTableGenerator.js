@@ -1,7 +1,7 @@
 import { Table } from "@mantine/core";
 import React from "react";
 
-export default function AssetTableGenerator({DataObject, title}) {
+export default function AssetTableGenerator({ DataObject, title }) {
   return (
     <Table verticalSpacing='xs' highlightOnHover>
       <thead>
@@ -9,19 +9,19 @@ export default function AssetTableGenerator({DataObject, title}) {
           <th colSpan="2">{title}</th>
         </tr>
         <tr key={"header"}>
-        {Object.keys(DataObject[0]).map((key) => (
-          <th>{key}</th>
-        ))}
-      </tr>
-      </thead>
-      <tbody>
-      {DataObject.map((item) => (
-        <tr key={item.id}>
-          {Object.values(item).map((val) => (
-            <td>{val}</td>
+          {Object.keys(DataObject[0]).map((key) => (
+            <th>{key}</th>
           ))}
         </tr>
-          ))}
+      </thead>
+      <tbody>
+        {DataObject.map((item) => (
+          <tr key={item.id}>
+            {Object.values(item).map((val) => (
+              <td>{val}</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </Table>
     // <div>HI</div>
