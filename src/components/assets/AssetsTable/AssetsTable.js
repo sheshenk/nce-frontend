@@ -8,9 +8,10 @@ export default function AssetsTable({ walletid }) {
 	// console.log("ASSETS TABLE L8")
 	// console.log("WID",walletid)
 	const [walletAssets, setWalletAssets] = useState([])
-	const { loading: queryloading, error: queryError, data: queryData } = useQuery(WALLET_ASSETS_USER_QUERY,
+	const { loading: queryloading, error: queryError, data: queryData, refetch: refetch } = useQuery(WALLET_ASSETS_USER_QUERY,
 		{ variables: { walletid } }
 	);
+	useEffect(() => { refetch() }, [])
 	// console.log("ASSETS TABLE L12")
 	console.log("QD ", queryData)
 	useEffect(() => {

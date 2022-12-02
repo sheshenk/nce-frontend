@@ -15,9 +15,12 @@ export default function BalanceCard({ userid }) {
 	const [isLoading, setIsLoading] = useState(false)
 	const [date, setDate] = useState("")
 	const [color, setColor] = useState("green")
-	const { loading: queryloading, error: queryError, data: queryData } = useQuery(GET_USER_BALANCE,
+	const { loading: queryloading, error: queryError, data: queryData, refetch: refetch } = useQuery(GET_USER_BALANCE,
 		{ variables: { userid } }
 	);
+	useEffect(() => {
+		refetch()
+	}, [])
 
 	useEffect(() => {
 		let d = new Date()

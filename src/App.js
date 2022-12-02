@@ -41,10 +41,11 @@ export default function App() {
   useEffect(() => {
     if (loading) console.log('Loading user...')
     else if (error) setUser(null)
-    else setUser(data.currentUser)
+    else {
+      setUser(data.currentUser)
+    }
   }, [loading, error, data])
 
-  if (user === undefined) return <></>
   if (!user && (location.pathname === '/login' || location.pathname === '/register')) return <AuthPage />
   if (!user) return <AppContainer {...props}><JourneyPage {...props} /></AppContainer>
 

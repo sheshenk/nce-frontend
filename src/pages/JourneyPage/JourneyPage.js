@@ -63,10 +63,12 @@ export default function JourneyPage() {
         if (loading) console.log('Loading user...')
         else if (error) { setActive(0); setValue('step1') }
         else {
-            if (!data.currentUser) {
+            console.log(data);
+            if (data.currentUser == null) {
                 setActive(0); setValue('step1')
+            } else {
+                setUserid(data.currentUser.userid); setActive(data.currentUser.learnstage); setValue("step" + (data.currentUser.learnstage + 1))
             }
-            setUserid(data.currentUser.userid); setActive(data.currentUser.learnstage); setValue("step" + (data.currentUser.learnstage + 1))
         }
     }, [loading, error, data, location.pathname])
 
